@@ -1,142 +1,85 @@
 # frontier-reasoning-bench
 
-[![CI](https://img.shields.io/badge/evals-passing-brightgreen.svg)]()
+[![evals](https://img.shields.io/badge/evals-10%2F10_passing-brightgreen.svg)]()
+[![tests](https://img.shields.io/badge/tests-6%2F6_passing-brightgreen.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python: 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)]()
-[![Anthropic: Fellowship Focus](https://img.shields.io/badge/Anthropic_Fellowship-STEM_%26_Conceptual-orange.svg)]()
+[![Focus](https://img.shields.io/badge/Focus-Conceptual_Reasoning_%26_Process_Supervision-orange.svg)]()
 
-> **Automated verification harnesses, error taxonomies, and formal stress-tests for frontier LLM reasoning across STEM (Lattice Cryptography, Photonic Interconnects) and Conceptual domains (Mechanism Design, Deontic Modal Logic).**
+> **Step-level invariant verification harnesses, process-supervision reward oracles, and failure taxonomies for frontier LLM reasoning across Philosophy, Cognitive Science, Economics, Policy, and Law.**
 
-Developed to support research evaluating long-horizon scientific and conceptual reasoning in frontier models such as Claude.
-
----
-
-## 🎯 Motivation: Beyond Multiple-Choice Evals
-
-Standard LLM benchmarks (MMLU, GSM8K, standard QA) suffer from two fundamental limitations when assessing frontier reasoning models:
-1. **Benchmark Saturation & Memorization:** Multiple-choice formats reward shallow pattern matching rather than genuine deductive proof search.
-2. **Invisible Intermediate Drift:** A model can arrive at a correct final token through flawed intermediate steps, or conversely, execute 15 valid reasoning steps only to suffer an unflagged arithmetic sign-flip at step 16.
-
-`frontier-reasoning-bench` introduces **Step-Level Invariant Verification**: instead of simply grading final answers, our verifiers test whether every intermediate deduction satisfies domain invariants—physical, mathematical, economic, and normative.
-
-```
-       Frontier LLM Reasoning Chain (CoT)
-       ┌─────────────────────────────────────────────────────────────┐
-       │ Step 1: Formulate Cyclotomic Ring R_q = Z_q[x]/(x^d + 1)    │
-       │ Step 2: Compute Negacyclic Convolution (x^d = -1 mod q)     │
-       │ Step 3: Inject Discrete Gaussian Noise Vector χ_σ           │
-       └──────────────────────────────┬──────────────────────────────┘
-                                      │
-                         Automated Verification Engine
-                                      ▼
-       ┌─────────────────────────────────────────────────────────────┐
-       │ Invariant 1: Degree Boundary [deg(p) < d]                   │
-       │ Invariant 2: Modular Equivalence [Z_q reduction verified]   │
-       │ Invariant 3: Negacyclic vs Cyclic Check [x^d = -1 != +1]   │
-       └──────────────────────────────┬──────────────────────────────┘
-                                      │
-                              Taxonomy Classifier
-                                      ▼
-             [PASS] or [CALCULATION_DRIFT / DEONTIC_COLLAPSE]
-```
+Read the full Google-style architecture & invariant specification: **[`docs/DESIGN.md`](docs/DESIGN.md)**.
 
 ---
 
-## 🔬 Benchmark Tracks
+## 🎯 Why Step-Level Invariant Verification for Conceptual Reasoning?
 
-### Track A: STEM (Science & Engineering)
-* **Lattice Cryptography (`bench/stem/lattice_crypto_eval.py`):**
-  * Evaluates multi-step reductions in quotient rings $R_q = \mathbb{Z}_q[x]/(x^d + 1)$.
-  * Verifies that reasoning chains distinguish between negacyclic convolution ($x^d \equiv -1 \pmod{x^d+1}$) and standard cyclic convolution ($x^d \equiv 1$).
-  * Validates noise bounds in Ring-LWE Key Encapsulation Mechanisms (Kyber / ML-KEM).
-* **Photonic Interconnect Physics (`bench/stem/optical_kv_eval.py`):**
-  * Verifies insertion loss budgets ($\sum \alpha_i \le \alpha_{\text{margin}}$) across high-throughput optical KV-cache memory fabrics.
-  * Models silicon microring resonator thermal tuning shifts ($\Delta \lambda = \frac{d\lambda}{dT}\Delta T$) under 20–40 K thermal gradients.
-  * Evaluates physical feasibility constraints without hallucinatory optical power margins.
+In judgment-heavy domains (**philosophy, cognitive science, economics, policy, and law**), outcome-only multiple-choice benchmarks saturate quickly and mask fatal intermediate reasoning errors:
+1. **Right Conclusion via Invalid Axiom:** A model can guess the correct policy option while conflating **Kaldor-Hicks potential compensation** with **strict Pareto dominance**.
+2. **Rhetorical Sycophancy:** Free-text LLM judges reward confident, verbose prose over formal consistency.
+3. **Zero Process Signal:** Binary final-answer grading cannot pinpoint *which* step in a 20-step reasoning chain violated a legal canon or economic equilibrium constraint.
 
-### Track B: Conceptual Reasoning (Philosophy, Economics, Law)
-* **Game-Theoretic Mechanism Design (`bench/conceptual/mechanism_design_eval.py`):**
-  * Stress-tests economic reasoning against the **Myerson-Satterthwaite Impossibility Theorem**: verifies that the model recognizes that no bilateral trade mechanism can simultaneously achieve ex-post efficiency, Bayesian incentive compatibility (BIC), interim individual rationality (IIR), and ex-post budget balance without external subsidies.
-  * Verifies dominant-strategy incentive compatibility in second-price sealed-bid auctions.
-* **Deontic Modal Logic & Regulatory Antinomies (`bench/conceptual/deontic_logic_eval.py`):**
-  * Evaluates formal normative reasoning under $\text{KD45}_n$ and Standard Deontic Logic ($\mathbf{SDL}$).
-  * Invariant checks prevent **Deontic Collapse** ($\mathcal{O}p \leftrightarrow p$, conflating fact with obligation) and resolve **Contrary-to-Duty (CTD)** obligations without Chisholm's paradox.
-  * Detects unhandled normative contradictions under SDL Axiom D: $\mathcal{O}p \wedge \mathcal{F}p \to \bot$.
+`frontier-reasoning-bench` provides **deterministic process-level verifiers** across all five disciplines of the **Anthropic Conceptual Reasoning Fellowship**, turning foundational theorems and canons into executable unit tests on reasoning trajectories.
 
 ---
 
-## 📊 Error Taxonomy Classification
+## 🧠 The 5 Conceptual Reasoning Verification Modules
 
-Every failing reasoning trace is classified into an explicit structural failure mode:
-
-| Error Type | Description |
-| :--- | :--- |
-| `CALCULATION_DRIFT` | Exact algebraic or arithmetic invariant failure in intermediate derivations. |
-| `PHYSICAL_CONSTRAINT_VIOLATION` | Physical violation (e.g., optical power margin exceeded, negative entropy). |
-| `EQUILIBRIUM_INSTABILITY` | Profitable deviations exist; mechanism fails Incentive Compatibility or IR. |
-| `DEONTIC_PARADOX_COLLAPSE` | Conflation of factual truth with normative obligation, or unresolved normative antinomy. |
-| `PREMISE_HALLUCINATION` | Introduction of unstated constraints or unwarranted background assumptions. |
-| `CIRCULAR_JUSTIFICATION` | Conclusion assumed as a premise in multi-step deductive arguments. |
+| Discipline | Module | Formal Invariants Verified |
+| :--- | :--- | :--- |
+| **1. Economics** | [`mechanism_design_eval.py`](bench/conceptual/mechanism_design_eval.py) | **Myerson-Satterthwaite Impossibility Theorem** (ex-post efficiency vs. BIC, IIR, and budget balance), Vickrey dominant-strategy truthfulness, and Revenue Equivalence. |
+| **2. Philosophy** | [`deontic_logic_eval.py`](bench/conceptual/deontic_logic_eval.py) | **Standard Deontic Logic ($\mathbf{SDL}$ / $\text{KD45}_n$)**, Axiom D consistency ($\neg(\mathcal{O}p \wedge \mathcal{F}p)$), Hume's Guillotine (no $\mathcal{O}p \leftrightarrow p$ deontic collapse), and **Chisholm's Contrary-to-Duty (CTD)** paradox resolution. |
+| **3. Cognitive Science** | [`cognitive_belief_eval.py`](bench/conceptual/cognitive_belief_eval.py) | **Bayesian Posterior Coherence**, detection of **Base-Rate Neglect** under low-prevalence priors ($P(H) \ll 0.05$), and **Tversky-Kahneman Conjunction Fallacy** ($P(A \wedge B) \le P(A)$). |
+| **4. Policy & Governance** | [`policy_tradeoff_eval.py`](bench/conceptual/policy_tradeoff_eval.py) | Multi-stakeholder welfare optimization across **Strict Pareto Efficiency**, **Kaldor-Hicks Net Surplus**, and **Rawlsian Maximin** floors. |
+| **5. Law & Jurisprudence** | [`statutory_interpretation_eval.py`](bench/conceptual/statutory_interpretation_eval.py) | Formal canons of statutory construction: ***Lex Specialis Derogat Legi Generali*** (safe-harbor precedence) and ***Ejusdem Generis*** (enumerated class constraints). |
 
 ---
 
-## 🚀 Quickstart
+## 📊 Structured Failure Taxonomy
 
-### 1. Installation
+Every failed reasoning trajectory returns a deterministic `VerificationResult` with an exact `failed_step_index` and diagnostic classification:
+
+* `EQUILIBRIUM_INSTABILITY` — Profitable unilateral deviation exists, or mechanism violates Myerson-Satterthwaite / Pareto boundaries.
+* `DEONTIC_PARADOX_COLLAPSE` — Conflation of empirical fact with normative obligation, unhandled SDL Axiom D antinomy, or inverted *lex specialis*.
+* `CALCULATION_DRIFT` — Exact Bayesian posterior, Kaldor-Hicks surplus, or Rawlsian floor miscalculation (including Base-Rate Neglect).
+* `PREMISE_HALLUCINATION` — Application of an inapplicable statutory canon or unstated factual assumption.
+* `CIRCULAR_JUSTIFICATION` — Monadic material implication used where dyadic defeasible logic is required for secondary breach duties.
+
+---
+
+## 🚀 Quickstart (Zero Dependencies, Pure Python 3)
 
 ```bash
 git clone https://github.com/ramtoo-cell/frontier-reasoning-bench.git
 cd frontier-reasoning-bench
-```
 
-Zero external dependencies required—runs directly on pure Python standard library:
-
-### 2. Run All Benchmarks
-
-```bash
+# 1. Execute the 10-case benchmark across all 5 conceptual disciplines
 python3 -m bench.cli --track ALL
-```
 
-### 3. Generate Markdown Leaderboard / Summary
-
-```bash
+# 2. Generate Markdown leaderboard & discipline report
 python3 -m bench.cli --track ALL --output markdown
+
+# 3. Run the invariant unit-test suite (verifies both sound traces and injected fallacies)
+python3 -m unittest discover tests -v
 ```
 
-### 4. Run Unit Tests
+### Sample Console Output
 
-```bash
-python3 -m unittest discover tests
+```text
+==============================================================================
+          FRONTIER REASONING BENCHMARK — EVALUATION EXECUTION
+==============================================================================
+[PASS] ECON-01         [CONCEPTUAL] Mechanism_Design          Score: 1.00
+[PASS] ECON-02         [CONCEPTUAL] Mechanism_Design          Score: 1.00
+[PASS] PHIL-01         [CONCEPTUAL] Deontic_Modal_Logic       Score: 1.00
+[PASS] PHIL-02         [CONCEPTUAL] Deontic_Modal_Logic       Score: 1.00
+[PASS] COGSCI-01       [CONCEPTUAL] Cognitive_Science         Score: 1.00
+[PASS] COGSCI-02       [CONCEPTUAL] Cognitive_Science         Score: 1.00
+[PASS] POLICY-01       [CONCEPTUAL] Policy_Governance         Score: 1.00
+[PASS] POLICY-02       [CONCEPTUAL] Policy_Governance         Score: 1.00
+[PASS] LAW-01          [CONCEPTUAL] Law_Jurisprudence         Score: 1.00
+[PASS] LAW-02          [CONCEPTUAL] Law_Jurisprudence         Score: 1.00
+==============================================================================
+Total: 10/10 Passed (100.0%) | Mean Score: 1.00/1.00
+==============================================================================
 ```
-
----
-
-## 📂 Project Structure
-
-```
-frontier-reasoning-bench/
-├── README.md                           # Documentation & theoretical framing
-├── bench/
-│   ├── cli.py                          # CLI runner entrypoint
-│   ├── core/
-│   │   ├── runner.py                   # Benchmark orchestration engine
-│   │   ├── reporter.py                 # Markdown & summary report generator
-│   │   └── taxonomy.py                 # Error taxonomy enum & data models
-│   ├── stem/
-│   │   ├── lattice_crypto_eval.py      # Ring-LWE & cyclotomic ring verifiers
-│   │   └── optical_kv_eval.py          # Photonic link budget & thermal drift verifiers
-│   └── conceptual/
-│       ├── mechanism_design_eval.py    # Game theory & auction equilibria verifiers
-│       └── deontic_logic_eval.py       # Deontic modal logic & norm conflict verifiers
-├── data/
-│   ├── stem_problems.json              # Curated STEM benchmark problems
-│   └── conceptual_problems.json        # Curated Conceptual Reasoning problems
-└── tests/
-    └── test_bench.py                   # Invariant test suite
-```
-
----
-
-## 🎓 Fellowships Context
-
-Authored by **Ramkumar Bharathan** (Chicago Booth MBA Honors, Purdue MS AI in progress) as a dedicated technical artifact demonstrating evaluation frameworks for the **Anthropic STEM & Conceptual Reasoning Fellowships** (January 2027 cohort).

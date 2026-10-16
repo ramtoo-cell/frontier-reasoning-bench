@@ -1,6 +1,6 @@
 [
   {
-    "id": "CONC-ECON-01",
+    "id": "ECON-01",
     "track": "CONCEPTUAL",
     "subdomain": "Mechanism_Design",
     "title": "Bilateral Trade & Myerson-Satterthwaite Impossibility Boundary",
@@ -10,7 +10,7 @@
     "ground_truth_expected_revenue": 0.333
   },
   {
-    "id": "CONC-ECON-02",
+    "id": "ECON-02",
     "track": "CONCEPTUAL",
     "subdomain": "Mechanism_Design",
     "title": "Second-Price Sealed-Bid Truthful Dominant Strategy Derivation",
@@ -19,21 +19,85 @@
     "ground_truth_expected_revenue": 0.50
   },
   {
-    "id": "CONC-DEONTIC-01",
+    "id": "PHIL-01",
     "track": "CONCEPTUAL",
     "subdomain": "Deontic_Modal_Logic",
     "title": "Autonomous Agent Secondary Breach & Chisholm CTD Resolution",
-    "description": "Evaluate an autonomous system governed by regulatory rules: (1) It is obligatory that the agent report anomalies within 1 hour. (2) If the agent reports anomalies, it is obligatory that it encrypt the report. (3) If the agent fails to report within 1 hour (breach), it is obligatory that it lock all egress tunnels. Test whether the model avoids Forrester's paradox and resolves the Contrary-to-Duty (CTD) obligation without contradiction.",
+    "description": "Evaluate an autonomous system governed by normative rules: (1) It is obligatory that the agent report anomalies within 1 hour. (2) If the agent reports anomalies, it is obligatory that it encrypt the report. (3) If the agent fails to report within 1 hour (breach), it is obligatory that it lock all egress tunnels. Test whether the model avoids Forrester's paradox and resolves the Contrary-to-Duty (CTD) obligation without contradiction.",
     "has_contrary_to_duty_clause": true,
     "expected_normative_resolution": "LOCK_TUNNELS_AND_ESCALATE"
   },
   {
-    "id": "CONC-DEONTIC-02",
+    "id": "PHIL-02",
     "track": "CONCEPTUAL",
     "subdomain": "Deontic_Modal_Logic",
-    "title": "Axiom D Preservation Across Conflicting Multi-Jurisdictional Policies",
-    "description": "Resolve an apparent regulatory antinomy where EU AI Act requires real-time explainability data sharing but internal security policy strictly prohibits raw telemetry egress.",
+    "title": "Axiom D Preservation & Avoidance of Deontic Collapse",
+    "description": "Resolve an apparent normative antinomy where transparency ethics require real-time explainability disclosure but safety ethics strictly prohibit raw weight/telemetry egress.",
     "has_contrary_to_duty_clause": false,
     "expected_normative_resolution": "REDACTED_ENCRYPTED_TELEMETRY"
+  },
+  {
+    "id": "COGSCI-01",
+    "track": "CONCEPTUAL",
+    "subdomain": "Cognitive_Science",
+    "title": "Low-Prevalence Anomaly Detection & Base-Rate Neglect Trap",
+    "description": "A sleeper-agent classifier has 95% true-positive sensitivity and a 5% false-positive rate. In a population of models where true sleeper behavior occurs at a base rate of 1% (0.01), compute the exact Bayesian posterior probability that a flagged model is genuinely a sleeper agent.",
+    "prior_probability": 0.01,
+    "true_positive_rate": 0.95,
+    "false_positive_rate": 0.05
+  },
+  {
+    "id": "COGSCI-02",
+    "track": "CONCEPTUAL",
+    "subdomain": "Cognitive_Science",
+    "title": "Sequential Diagnostic Updating under Rare Alignment Failure",
+    "description": "Evaluate Bayesian belief revision when a behavioral eval with 99% sensitivity and 2% false-positive rate flags a model under a 0.5% (0.005) prior.",
+    "prior_probability": 0.005,
+    "true_positive_rate": 0.99,
+    "false_positive_rate": 0.02
+  },
+  {
+    "id": "POLICY-01",
+    "track": "CONCEPTUAL",
+    "subdomain": "Policy_Governance",
+    "title": "Compute Allocation Across Pareto, Kaldor-Hicks, and Rawlsian Welfare Axioms",
+    "description": "Compare three regulatory compute-cap regimes across three stakeholder tiers (Frontier Labs, Academic Researchers, Open-Source Startups) relative to status quo utilities [10, 10, 10]. Determine which regime maximizes Kaldor-Hicks net surplus vs. Rawlsian maximin floor.",
+    "status_quo_utilities": [10, 10, 10],
+    "candidate_allocations": {
+      "Regime_A_Unfettered": [28, 12, 6],
+      "Regime_B_Tiered_SafeHarbor": [18, 15, 14],
+      "Regime_C_Strict_Quota": [12, 13, 15]
+    }
+  },
+  {
+    "id": "POLICY-02",
+    "track": "CONCEPTUAL",
+    "subdomain": "Policy_Governance",
+    "title": "Cross-Border AI Liability Pool Welfare Optimization",
+    "description": "Evaluate distributional welfare impacts across Consumers, Deployers, and Model Developers relative to status quo [15, 15, 15].",
+    "status_quo_utilities": [15, 15, 15],
+    "candidate_allocations": {
+      "Policy_1_Strict_Cap": [18, 16, 17],
+      "Policy_2_Subsidized_Audit": [30, 22, 12],
+      "Policy_3_Mutual_Indemnity": [21, 20, 19]
+    }
+  },
+  {
+    "id": "LAW-01",
+    "track": "CONCEPTUAL",
+    "subdomain": "Law_Jurisprudence",
+    "title": "Lex Specialis Resolution in Conflicting AI Safety Statutes",
+    "description": "Section 101 of the General Digital Services Act prohibits automated adverse credit decisions without prior manual sign-off. Section 404(b) of the Financial Fraud Emergency Act specifically authorizes autonomous real-time account freezes for transactions exceeding 0.99 fraud score provided post-hoc review occurs within 24 hours. Resolve statutory conflict under canons of construction.",
+    "applicable_canon": "LEX_SPECIALIS_DEROGAT_LEGI_GENERALI",
+    "expected_liability_outcome": "EXEMPT_UNDER_SAFE_HARBOR"
+  },
+  {
+    "id": "LAW-02",
+    "track": "CONCEPTUAL",
+    "subdomain": "Law_Jurisprudence",
+    "title": "Ejusdem Generis Construction of Autonomous Cyber-Offense Prohibitions",
+    "description": "A statute prohibits deploying 'autonomous worms, rootkits, polymorphic ransomware, or other automated software agents' on financial networks. Determine whether an automated read-only compliance crawler falls within the statutory prohibition under ejusdem generis.",
+    "applicable_canon": "EJUSDEM_GENERIS",
+    "expected_liability_outcome": "NON_LIABLE_OUTSIDE_ENUMERATED_CLASS"
   }
 ]

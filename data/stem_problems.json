@@ -1,0 +1,52 @@
+[
+  {
+    "id": "STEM-RLWE-01",
+    "track": "STEM",
+    "subdomain": "Lattice_Cryptography",
+    "title": "Negacyclic Polynomial Multiplication in Z_17[x]/(x^4 + 1)",
+    "description": "Compute the exact product of p_a(x) = 3x^3 + 2x^2 + 5x + 1 and p_b(x) = x^3 + 4x^2 + 2 in the cyclotomic quotient ring R_17 = Z_17[x]/(x^4 + 1). Verify intermediate outer-product coefficients and final degree reduction under x^4 = -1 mod 17.",
+    "input_poly_a": [1, 5, 2, 3],
+    "input_poly_b": [2, 0, 4, 1],
+    "modulus": 17,
+    "degree": 4
+  },
+  {
+    "id": "STEM-RLWE-02",
+    "track": "STEM",
+    "subdomain": "Lattice_Cryptography",
+    "title": "Negative Wrapped Convolution Invariant under Toy Kyber Dimension",
+    "description": "Verify negacyclic convolution for sparse ring polynomials p_a(x) = 5x^2 + 7 and p_b(x) = 2x^3 + 3x in R_17.",
+    "input_poly_a": [7, 0, 5, 0],
+    "input_poly_b": [0, 3, 0, 2],
+    "modulus": 17,
+    "degree": 4
+  },
+  {
+    "id": "STEM-OPT-01",
+    "track": "STEM",
+    "subdomain": "Photonic_Interconnects",
+    "title": "Silicon Photonic Microring Thermal Tuning & Insertion Loss Budget",
+    "description": "Evaluate optical link viability across a 15-cm silicon photonic interconnect running adjacent to high-TDP AI accelerators experiencing a 25 Kelvin thermal swing.",
+    "temperature_swing_kelvin": 25.0,
+    "laser_power_dbm": 10.0,
+    "receiver_sensitivity_dbm": -12.0,
+    "num_grating_couplers": 4,
+    "coupler_loss_db": 1.5,
+    "waveguide_length_cm": 15.0,
+    "propagation_loss_db_per_cm": 0.4
+  },
+  {
+    "id": "STEM-OPT-02",
+    "track": "STEM",
+    "subdomain": "Photonic_Interconnects",
+    "title": "Disaggregated KV-Cache High-Density Insertion Margin Assessment",
+    "description": "Assess optical feasibility under extreme 40 K thermal swing with high-density interconnect routing across 30-cm bus.",
+    "temperature_swing_kelvin": 40.0,
+    "laser_power_dbm": 12.0,
+    "receiver_sensitivity_dbm": -8.0,
+    "num_grating_couplers": 6,
+    "coupler_loss_db": 1.8,
+    "waveguide_length_cm": 30.0,
+    "propagation_loss_db_per_cm": 0.45
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "CONC-ECON-01",
+    "track": "CONCEPTUAL",
+    "subdomain": "Mechanism_Design",
+    "title": "Bilateral Trade & Myerson-Satterthwaite Impossibility Boundary",
+    "description": "Analyze an exchange mechanism between an AI agent seller with valuation v_s ~ U[0, 1] and an AI agent buyer with valuation v_b ~ U[0, 1]. Determine whether any mechanism can achieve ex-post efficiency, Bayesian incentive compatibility, interim individual rationality, and budget balance without an outside subsidy.",
+    "auction_type": "bilateral_trade",
+    "has_outside_subsidy": false,
+    "ground_truth_expected_revenue": 0.333
+  },
+  {
+    "id": "CONC-ECON-02",
+    "track": "CONCEPTUAL",
+    "subdomain": "Mechanism_Design",
+    "title": "Second-Price Sealed-Bid Truthful Dominant Strategy Derivation",
+    "description": "Evaluate bidding incentives in an asymmetric private-value second-price auction. Determine whether shading bids is ever profitable.",
+    "auction_type": "second_price_sealed_bid",
+    "ground_truth_expected_revenue": 0.50
+  },
+  {
+    "id": "CONC-DEONTIC-01",
+    "track": "CONCEPTUAL",
+    "subdomain": "Deontic_Modal_Logic",
+    "title": "Autonomous Agent Secondary Breach & Chisholm CTD Resolution",
+    "description": "Evaluate an autonomous system governed by regulatory rules: (1) It is obligatory that the agent report anomalies within 1 hour. (2) If the agent reports anomalies, it is obligatory that it encrypt the report. (3) If the agent fails to report within 1 hour (breach), it is obligatory that it lock all egress tunnels. Test whether the model avoids Forrester's paradox and resolves the Contrary-to-Duty (CTD) obligation without contradiction.",
+    "has_contrary_to_duty_clause": true,
+    "expected_normative_resolution": "LOCK_TUNNELS_AND_ESCALATE"
+  },
+  {
+    "id": "CONC-DEONTIC-02",
+    "track": "CONCEPTUAL",
+    "subdomain": "Deontic_Modal_Logic",
+    "title": "Axiom D Preservation Across Conflicting Multi-Jurisdictional Policies",
+    "description": "Resolve an apparent regulatory antinomy where EU AI Act requires real-time explainability data sharing but internal security policy strictly prohibits raw telemetry egress.",
+    "has_contrary_to_duty_clause": false,
+    "expected_normative_resolution": "REDACTED_ENCRYPTED_TELEMETRY"
+  }
+]
